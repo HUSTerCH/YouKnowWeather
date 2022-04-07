@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">YouKnowWeather</string>
+    <string name="enter_the_address">Enter the Address</string>
 </resources>
