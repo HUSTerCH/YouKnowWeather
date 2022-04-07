@@ -1,10 +1,10 @@
-package com.youknowweather.android.network
+package com.youknowweather.android.network.weather
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-//使用placeService接口
-object ServiceCreator {
-    private const val BASE_URL = "https://api.caiyunapp.com/"
+
+object WeatherServiceCreator {
+    private const val BASE_URL = "https://yiketianqi.com/free/day/"
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

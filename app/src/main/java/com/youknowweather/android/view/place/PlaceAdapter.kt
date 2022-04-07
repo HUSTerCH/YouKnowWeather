@@ -14,6 +14,7 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder> (){
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val placeName: TextView = view.findViewById(R.id.place_name)
         val placeAddress:TextView = view.findViewById(R.id.place_address)
+        val placeLocation:TextView = view.findViewById(R.id.place_location)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,6 +26,7 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder> (){
         val place = placeList[position]
         holder.placeName.text = place.name
         holder.placeAddress.text = place.address
+        holder.placeLocation.text = "经度：${place.location.lng}，纬度：${place.location.lat}"
     }
 
     override fun getItemCount() = placeList.size

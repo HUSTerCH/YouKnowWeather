@@ -1,5 +1,9 @@
 package com.youknowweather.android.network
 
+import com.youknowweather.android.network.place.PlaceService
+import com.youknowweather.android.network.place.PlaceServiceCreator
+import com.youknowweather.android.network.weather.WeatherService
+import com.youknowweather.android.network.weather.WeatherServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -8,12 +12,15 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 object YouKnowWeatherNet {
-    private val placeService = ServiceCreator.create<PlaceService>()
+    private val placeService = PlaceServiceCreator.create<PlaceService>()
+    private val weatherService = WeatherServiceCreator.create<WeatherService>()
+
     suspend fun searchPlaces(query:String) = placeService.searchPlaces(query).await()
+    suspend fun getWuhanWeather() = weatherService.getWuhanRealTimeWeather().await()
+
     private suspend fun <T> Call<T>.await() :T {
         return suspendCoroutine { continuation ->
             enqueue(object :Callback<T> {
-
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     val body = response.body()
                     if (body != null) continuation.resume(body)

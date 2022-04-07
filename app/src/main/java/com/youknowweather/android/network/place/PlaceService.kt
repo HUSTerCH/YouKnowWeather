@@ -1,4 +1,4 @@
-package com.youknowweather.android.network
+package com.youknowweather.android.network.place
 
 import com.youknowweather.android.YouKnowWeatherApplication
 import com.youknowweather.android.model.PlaceResponse
