@@ -1,6 +1,7 @@
 package com.youknowweather.android.view.place
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import com.youknowweather.android.viewModel.PlaceViewModel
 import kotlinx.android.synthetic.main.fragment_place.*
 
 class PlaceFragment : Fragment() {
-    val viewModel by lazy { ViewModelProvider(this).get(PlaceViewModel::class.java) }
+    private val viewModel by lazy { ViewModelProvider(this).get(PlaceViewModel::class.java) }
     private lateinit var adapter: PlaceAdapter
 
     override fun onCreateView(
@@ -44,6 +45,7 @@ class PlaceFragment : Fragment() {
         viewModel.placeLiveData.observe(viewLifecycleOwner, Observer { result ->
             val places = result.getOrNull()
             if (places != null) {
+                Log.e("地址",places[0].address)
                 placeRecyclerView.visibility = View.VISIBLE
                 bgImageView.visibility = View.GONE
                 viewModel.placeList.clear()

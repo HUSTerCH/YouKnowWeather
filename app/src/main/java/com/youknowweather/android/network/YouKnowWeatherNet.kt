@@ -1,5 +1,6 @@
 package com.youknowweather.android.network
 
+import android.util.Log
 import com.youknowweather.android.network.place.PlaceService
 import com.youknowweather.android.network.place.PlaceServiceCreator
 import com.youknowweather.android.network.weather.WeatherService
@@ -16,7 +17,7 @@ object YouKnowWeatherNet {
     private val weatherService = WeatherServiceCreator.create<WeatherService>()
 
     suspend fun searchPlaces(query:String) = placeService.searchPlaces(query).await()
-    suspend fun getWuhanWeather() = weatherService.getWuhanRealTimeWeather().await()
+    suspend fun getRTWeather(query: String) = weatherService.getRealTimeWeather(query).await()
 
     private suspend fun <T> Call<T>.await() :T {
         return suspendCoroutine { continuation ->
@@ -24,7 +25,7 @@ object YouKnowWeatherNet {
                 override fun onResponse(call: Call<T>, response: Response<T>) {
                     val body = response.body()
                     if (body != null) continuation.resume(body)
-                    else continuation.resumeWithException(RuntimeException("response body is null"))
+                    else continuation.resumeWithException(RuntimeException("response body is null 空"))
                 }
                 override fun onFailure(call: Call<T>, t: Throwable) {
                     continuation.resumeWithException(t)

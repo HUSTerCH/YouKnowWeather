@@ -24,20 +24,16 @@ object Repository {
         emit(result)
     }
 
-    fun getWuhanWea() = liveData(Dispatchers.IO) {
-        val weatherResponse = YouKnowWeatherNet.getWuhanWeather()
-        val result = try {
-            if (true) {
-                Result.success(weatherResponse)
-            } else {
-                Result.failure(RuntimeException("get city info error"))
-            }
+    fun getRealTimeWea(query: String) = liveData(Dispatchers.IO) {
+        val res = try {
+            val weatherResponse = YouKnowWeatherNet.getRTWeather(query)
+            Result.success(weatherResponse)
         } catch (e:Exception) {
             Result.failure<RealTimeResponse>(e)
         }
-        Log.e("获取武汉天气：",YouKnowWeatherNet.getWuhanWeather().toString())
-        emit(result)
+        emit(res)
     }
+
 
     private fun <T> fire(context: CoroutineContext,block:suspend () -> Result<T>) =
         liveData<Result<T>>(context) {

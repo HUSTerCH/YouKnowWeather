@@ -9,7 +9,7 @@ data class RealTimeResponse (
     val air:String)
 
 //{
-//    "cityid":"101120101",
+//    "cityid":"101120101",用不到
 //    "city":"济南",
 //    "update_time":"20:55",
 //    "wea":"晴",
