@@ -27,9 +27,10 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder> (){
             val place = placeList[position]
             val intent = Intent(parent.context,WeatherActivity::class.java).apply {
                 putExtra("placeName",place.name)
+                putExtra("placeLng",place.location.lng)
+                putExtra("placeLat",place.location.lat)
             }
             fragment.startActivity(intent)
-            fragment.activity?.finish()
         }
         return holder
     }

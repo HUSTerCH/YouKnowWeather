@@ -14,10 +14,10 @@ import kotlin.coroutines.suspendCoroutine
 
 object YouKnowWeatherNet {
     private val placeService = PlaceServiceCreator.create<PlaceService>()
-    private val weatherService = WeatherServiceCreator.create<WeatherService>()
+    private val weatherService = WeatherServiceCreator.create(WeatherService::class.java)
 
     suspend fun searchPlaces(query:String) = placeService.searchPlaces(query).await()
-    suspend fun getRTWeather(query: String) = weatherService.getRealTimeWeather(query).await()
+    suspend fun getRTWeather(lng:String,lat:String) = weatherService.getRealTimeWeather(lng,lat).await()
 
     private suspend fun <T> Call<T>.await() :T {
         return suspendCoroutine { continuation ->

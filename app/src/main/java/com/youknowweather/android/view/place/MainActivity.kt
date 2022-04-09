@@ -11,9 +11,5 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        floatingActionButton.setOnClickListener {
-            val intent = Intent(this,WeatherActivity::class.java)
-            startActivity(intent)
-        }
     }
 }

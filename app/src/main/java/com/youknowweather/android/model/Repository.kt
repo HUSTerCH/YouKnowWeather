@@ -24,9 +24,9 @@ object Repository {
         emit(result)
     }
 
-    fun getRealTimeWea(query: String) = liveData(Dispatchers.IO) {
+    fun getRealTimeWea(lng:String,lat:String) = liveData(Dispatchers.IO) {
         val res = try {
-            val weatherResponse = YouKnowWeatherNet.getRTWeather(query)
+            val weatherResponse = YouKnowWeatherNet.getRTWeather(lng,lat)
             Result.success(weatherResponse)
         } catch (e:Exception) {
             Result.failure<RealTimeResponse>(e)

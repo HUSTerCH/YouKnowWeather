@@ -8,7 +8,7 @@ class YouKnowWeatherApplication:Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-//        等审核通过再写
+//        彩云天气api令牌值，注册账号为skyfengsheng@icloud.com
         const val TOKEN = "eCkOChFkqJyKPog5"
     }
 
