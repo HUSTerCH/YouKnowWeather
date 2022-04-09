@@ -1,5 +1,6 @@
 package com.youknowweather.android.viewModel
 
+import androidx.lifecycle.LiveDataScope
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel

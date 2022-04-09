@@ -23,10 +23,7 @@ class WeatherActivity :AppCompatActivity(){
             Log.e("WeatherActivity",result.isSuccess.toString())
             val weather = result.getOrNull()
             if (weather != null) {
-                placeName.text = weather.city
-                currentTemp.text = "${weather.tem}℃"
-                currentSky.text = weather.wea
-                currentAQI.text = "空气指数 ${weather.air}"
+
             } else {
                 Toast.makeText(this,"Can not get Wuhan Weather now",Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()

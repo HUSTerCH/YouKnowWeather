@@ -9,7 +9,7 @@ class YouKnowWeatherApplication:Application() {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
 //        等审核通过再写
-        const val TOKEN = ""
+        const val TOKEN = "eCkOChFkqJyKPog5"
     }
 
     override fun onCreate() {

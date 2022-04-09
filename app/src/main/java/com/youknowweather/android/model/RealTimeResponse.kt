@@ -1,24 +1,30 @@
 package com.youknowweather.android.model
 
-data class RealTimeResponse (
-    val cityid:String,val city:String,
-    val update_time:String,
-    val wea:String,val wea_img:String,
-    val tem:String,val tem_day:String,val tem_night:String,
-    val win:String,val win_speed:String,val win_meter:String,
-    val air:String)
+data class RealTimeResponse (val status:String,val api_version:String,val api_status:String,val lang:String,
+                             val unit: String,val tzshift:Int,val timezone:String,val server_time:Int,
+                             val location: Location) {
 
-//{
-//    "cityid":"101120101",用不到
-//    "city":"济南",
-//    "update_time":"20:55",
-//    "wea":"晴",
-//    "wea_img":"qing",
-//    "tem":"11",
-//    "tem_day":"17",
-//    "tem_night":"7",
-//    "win":"东南风 ",
-//    "win_speed":"1级",
-//    "win_meter":"小于12km/h",
-//    "air":"73"
-//}
+    data class Result(val primary:Int) {
+        data class Realtime(val status: String,val temperature:Int,val humidity:Double,val cloudrate:Int,
+                            val skycon:String,val visibility: Double,val dswrf:Double,
+                            val pressure:Double) {
+            data class Wind(val speed:Double,val direction: Int)
+            data class Precipitation(val nonthing:Nothing) {
+                data class Local(val status: String,val datasource: String,val intensity:Int)
+
+                data class Nearest(val status: String,val distance:Int,val intensity: Int)
+            }
+            data class AirQuality(val pm25:Int,val pm10:Int,val o3:Int,val so2:Int,val no2:Int,val co:Double) {
+                data class Aqi(val chn:Int,val usa:Int)
+
+                data class Description(val chn:String,val usa:String)
+            }
+            data class LifeIndex(val nonthing: Nothing) {
+                data class Ultraviolet(val index:Int,val desc:String)
+
+                data class Comfort(val index:Int,val desc:String)
+            }
+        }
+    }
+}
+

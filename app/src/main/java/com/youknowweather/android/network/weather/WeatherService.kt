@@ -1,14 +1,15 @@
 package com.youknowweather.android.network.weather
 
 
+import com.youknowweather.android.YouKnowWeatherApplication
 import com.youknowweather.android.model.RealTimeResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WeatherService {
-    @GET("day?appid=35392864&appsecret=ZdObNrg3&unescape=1")
-    fun getRealTimeWeather(@Query("city") city:String): Call<RealTimeResponse>
+    @GET("v2.5/${YouKnowWeatherApplication.TOKEN}/{lng},{lat}/realtime.json")
+    fun getRealTimeWeather(@Path("lng") lng:String,@Path("lat") lat:String): Call<RealTimeResponse>
 }
-
 
