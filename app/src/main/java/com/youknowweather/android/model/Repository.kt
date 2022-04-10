@@ -1,6 +1,5 @@
 package com.youknowweather.android.model
 
-import android.util.Log
 import androidx.lifecycle.liveData
 import com.youknowweather.android.network.YouKnowWeatherNet
 import kotlinx.coroutines.Dispatchers

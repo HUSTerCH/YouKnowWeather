@@ -7,6 +7,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <include layout="@layout/now"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:text="空气质量"
+            android:textSize="19dp"
+            android:textStyle="bold"/>
+        <include layout="@layout/air_quality"/>
     </LinearLayout>
 
 </ScrollView>

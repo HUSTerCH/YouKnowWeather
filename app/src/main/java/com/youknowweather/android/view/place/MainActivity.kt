@@ -1,15 +1,15 @@
 package com.youknowweather.android.view.place
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.youknowweather.android.R
-import com.youknowweather.android.view.weather.WeatherActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.youknowweather.android.view.ChangeWindowColor
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ChangeWindowColor.setWindowStatusBarColor(this,R.drawable.bg_place)
     }
 }
