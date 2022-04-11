@@ -1,17 +1,25 @@
 package com.youknowweather.android.view.weather
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.youknowweather.android.R
+import com.youknowweather.android.model.DailyResponse
 import com.youknowweather.android.view.ChangeWindowColor
 import com.youknowweather.android.viewModel.WeatherViewModel
 import kotlinx.android.synthetic.main.air_quality.*
 import kotlinx.android.synthetic.main.life_index.*
 import kotlinx.android.synthetic.main.now.*
+import kotlinx.android.synthetic.main.seven_days_future_wea.*
+import kotlinx.android.synthetic.main.weather_activity.*
 
 class WeatherActivity :AppCompatActivity(){
     private val viewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
@@ -48,15 +56,16 @@ class WeatherActivity :AppCompatActivity(){
                 Toast.makeText(this,"无法获取 ${intent.getStringExtra("placeName")} 的天气",Toast.LENGTH_LONG).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
+            swipeRefresh.isRefreshing = false
         })
         viewModel.cityWeaDaily.observe(this, Observer { result ->
             val dailyWea = result.getOrNull()
             if (dailyWea != null) {
-                max_min_temp.text = "${dailyWea.result.daily.temperature[0].max.toInt()} / ${dailyWea.result.daily.temperature[0].min.toInt()} °C"
+                "${dailyWea.result.daily.temperature[0].max.toInt()} / ${dailyWea.result.daily.temperature[0].min.toInt()} °C".also { max_min_temp.text = it }
                 sunrise_time.setTextView(dailyWea.result.daily.astro[0].sunrise.time)
                 sunset_time.setTextView(dailyWea.result.daily.astro[0].sunset.time)
-                wind_speed.setTextView(dailyWea.result.daily.wind[0].avg.speed.toInt().toString())
-                wind_direction.setTextView(dailyWea.result.daily.wind[0].avg.direction.toString())
+                wind_speed.setTextView("${dailyWea.result.daily.wind[0].avg.speed} m/s")
+                setWindDirectionDesc(dailyWea.result.daily.wind[0].avg.direction)
                 humidity.setTextView("${(dailyWea.result.daily.humidity[0].avg * 100).toInt()} %")
                 cloud_rate.setTextView("${(dailyWea.result.daily.cloudrate[0].avg * 100).toInt()} %")
                 visibility.setTextView("${ dailyWea.result.daily.visibility[0].avg} km")
@@ -65,7 +74,36 @@ class WeatherActivity :AppCompatActivity(){
                 dressing_index.setTextView(dailyWea.result.daily.life_index.dressing[0].desc)
                 comfort_index.setTextView(dailyWea.result.daily.life_index.comfort[0].desc)
                 cold_risk.setTextView(dailyWea.result.daily.life_index.coldRisk[0].desc)
+                setFutureDailyWea(dailyWea.result.daily)
             }
+            swipeRefresh.isRefreshing = false
+        })
+        swipeRefresh.setOnRefreshListener {
+            viewModel.searchCityDailyWea(
+                intent.getStringExtra("placeLng")!!,
+                intent.getStringExtra("placeLat")!!)
+            viewModel.searchCityDailyWea(
+                intent.getStringExtra("placeLng")!!,
+                intent.getStringExtra("placeLat")!!
+            )
+            swipeRefresh.isRefreshing = true
+        }
+        select_city_button.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+        drawerLayout.addDrawerListener(object :DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+
+            override fun onDrawerOpened(drawerView: View) {
+                val manager = getSystemService(Context.INPUT_METHOD_SERVICE)
+                as InputMethodManager
+                manager.hideSoftInputFromWindow(drawerView.windowToken,InputMethodManager.HIDE_NOT_ALWAYS)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {}
+
+            override fun onDrawerStateChanged(newState: Int) {}
+
         })
     }
 
@@ -181,5 +219,59 @@ class WeatherActivity :AppCompatActivity(){
             }
         }
         return picID
+    }
+
+    fun setWindDirectionDesc(direction:Float) {
+        when(direction) {
+            in 11.26..33.75 -> wind_direction.setTextView("北东北")
+            in 33.76..56.25 -> wind_direction.setTextView("东北")
+            in 56.26..78.75 -> wind_direction.setTextView("东东北")
+            in 78.76..101.25 -> wind_direction.setTextView("东")
+            in 101.26..23.75 -> wind_direction.setTextView("东东南")
+            in 123.75..146.25 -> wind_direction.setTextView("东南")
+            in 146.26..168.75 -> wind_direction.setTextView("南东南")
+            in 168.76..191.25 -> wind_direction.setTextView("南")
+            in 192.26..213.75 -> wind_direction.setTextView("南西南")
+            in 213.76..236.25 -> wind_direction.setTextView("西南")
+            in 236.26..258.75 -> wind_direction.setTextView("西西南")
+            in 258.76..281.25 -> wind_direction.setTextView("西")
+            in 281.26..303.75 -> wind_direction.setTextView("西西北")
+            in 303.76..326.25 -> wind_direction.setTextView("西北")
+            in 326.26..348.75 -> wind_direction.setTextView("北西北")
+            else -> wind_direction.setTextView("北")
+        }
+    }
+
+    fun setFutureDailyWea(daily: DailyResponse.Result.Daily) {
+        day1.setWeaImg(daily.skycon[1].value)
+        day2.setWeaImg(daily.skycon[2].value)
+        day3.setWeaImg(daily.skycon[3].value)
+        day4.setWeaImg(daily.skycon[4].value)
+        day5.setWeaImg(daily.skycon[5].value)
+        day6.setWeaImg(daily.skycon[6].value)
+        day7.setWeaImg(daily.skycon[7].value)
+        day1.setWeaDate(daily.temperature[1].date)
+        day2.setWeaDate(daily.temperature[2].date)
+        day3.setWeaDate(daily.temperature[3].date)
+        day4.setWeaDate(daily.temperature[4].date)
+        day5.setWeaDate(daily.temperature[5].date)
+        day6.setWeaDate(daily.temperature[6].date)
+        day7.setWeaDate(daily.temperature[7].date)
+        day1.setWeaDesc(daily.skycon[1].value)
+        day2.setWeaDesc(daily.skycon[2].value)
+        day3.setWeaDesc(daily.skycon[3].value)
+        day4.setWeaDesc(daily.skycon[4].value)
+        day5.setWeaDesc(daily.skycon[5].value)
+        day6.setWeaDesc(daily.skycon[6].value)
+        day7.setWeaDesc(daily.skycon[7].value)
+        day1.setWeaTemp(daily.temperature[1].min.toInt(),daily.temperature[1].max.toInt())
+        day2.setWeaTemp(daily.temperature[2].min.toInt(),daily.temperature[2].max.toInt())
+        day3.setWeaTemp(daily.temperature[3].min.toInt(),daily.temperature[3].max.toInt())
+        day4.setWeaTemp(daily.temperature[4].min.toInt(),daily.temperature[4].max.toInt())
+        day5.setWeaTemp(daily.temperature[5].min.toInt(),daily.temperature[5].max.toInt())
+        day6.setWeaTemp(daily.temperature[6].min.toInt(),daily.temperature[6].max.toInt())
+        day7.setWeaTemp(daily.temperature[7].min.toInt(),daily.temperature[7].max.toInt())
+
+
     }
 }

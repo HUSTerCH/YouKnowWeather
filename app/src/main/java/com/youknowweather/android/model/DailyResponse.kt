@@ -9,7 +9,7 @@ data class DailyResponse(val status:String,val result: Result) {
                 data class SunRise(val time:String)
                 data class Sunset(val time: String)
             }
-            data class Temperature(val max:Float,val min:Float,val avg:Float)
+            data class Temperature(val date: String,val max:Float,val min:Float,val avg:Float)
             data class Wind(val max:MaxWind,val min:MinWind,val avg:AvgWind) {
                 data class MaxWind(val speed:Float,val direction: Float)
                 data class MinWind(val speed: Float,val direction: Float)

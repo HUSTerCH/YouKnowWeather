@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">YouKnowWeather</string>
-    <string name="enter_the_address">Enter the Address</string>
+    <string name="enter_the_address">输入地址以查询天气</string>
 </resources>

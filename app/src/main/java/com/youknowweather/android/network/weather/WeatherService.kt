@@ -13,7 +13,7 @@ interface WeatherService {
     @GET("v2.5/${YouKnowWeatherApplication.TOKEN}/{lng},{lat}/realtime.json")
     fun getRealTimeWeather(@Path("lng") lng:String,@Path("lat") lat:String): Call<RealTimeResponse>
 
-    @GET("v2.5/${YouKnowWeatherApplication.TOKEN}/{lng},{lat}/daily.json?dailystep=7")
+    @GET("v2.5/${YouKnowWeatherApplication.TOKEN}/{lng},{lat}/daily.json?dailysteps=8")
     fun getDailyWeather(@Path("lng") lng:String,@Path("lat") lat:String):Call<DailyResponse>
 }
 

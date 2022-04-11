@@ -17,6 +17,11 @@
         <attr name="index_text" format="string"/>
         <attr name="index_desc" format="string"/>
     </declare-styleable>
-
-
+    <declare-styleable name="FutureWeaItemLayout">
+        <attr name="future_img" format="string"/>
+        <attr name="future_date" format="string"/>
+        <attr name="future_temp_min" format="integer"/>
+        <attr name="future_temp_max" format="integer"/>
+        <attr name="future_desc" format="string"/>
+    </declare-styleable>
 </resources>

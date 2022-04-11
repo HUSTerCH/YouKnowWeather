@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.youknowweather.android.R
 import com.youknowweather.android.model.Place
 import com.youknowweather.android.view.weather.WeatherActivity
+import kotlinx.android.synthetic.main.weather_activity.*
 
 class PlaceAdapter(private val fragment: Fragment,private val placeList: List<Place>) :
 RecyclerView.Adapter<PlaceAdapter.ViewHolder> (){
@@ -25,12 +26,24 @@ RecyclerView.Adapter<PlaceAdapter.ViewHolder> (){
         holder.itemView.setOnClickListener {
             val position = holder.absoluteAdapterPosition
             val place = placeList[position]
-            val intent = Intent(parent.context,WeatherActivity::class.java).apply {
-                putExtra("placeName",place.name)
-                putExtra("placeLng",place.location.lng)
-                putExtra("placeLat",place.location.lat)
+            val activity = fragment.activity
+            if (activity is WeatherActivity) {
+                activity.drawerLayout.closeDrawers()
+                val intent = Intent(parent.context,WeatherActivity::class.java).apply {
+                    putExtra("placeName",place.name)
+                    putExtra("placeLng",place.location.lng)
+                    putExtra("placeLat",place.location.lat)
+                }
+                fragment.startActivity(intent)
+                activity?.finish()
+            } else {
+                val intent = Intent(parent.context,WeatherActivity::class.java).apply {
+                    putExtra("placeName",place.name)
+                    putExtra("placeLng",place.location.lng)
+                    putExtra("placeLat",place.location.lat)
+                }
+                fragment.startActivity(intent)
             }
-            fragment.startActivity(intent)
         }
         return holder
     }
