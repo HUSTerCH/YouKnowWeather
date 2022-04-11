@@ -5,8 +5,11 @@
       <map>
         <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/activity_main.xml" value="0.2164855072463768" />
         <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/air_quailty.xml" value="0.2740036231884058" />
-        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/air_quality.xml" value="0.45" />
-        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/now.xml" value="0.22418478260869565" />
+        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/air_quality.xml" value="0.1" />
+        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/fragment_place.xml" value="0.3026041666666667" />
+        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/life_index.xml" value="0.335" />
+        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/life_index_item.xml" value="0.1" />
+        <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/now.xml" value="0.45" />
         <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/place_item.xml" value="0.2740036231884058" />
         <entry key="..\:/Desktop/Study&amp;Work/github/YouKnowWeather/app/src/main/res/layout/weather_activity.xml" value="0.2740036231884058" />
       </map>

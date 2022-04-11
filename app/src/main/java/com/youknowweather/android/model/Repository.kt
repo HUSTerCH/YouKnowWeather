@@ -33,6 +33,16 @@ object Repository {
         emit(res)
     }
 
+    fun getDailyWea(lng: String,lat: String) = liveData(Dispatchers.IO) {
+        val result = try {
+            val dailyWeaResponse = YouKnowWeatherNet.getDailyWeather(lng, lat)
+            Result.success(dailyWeaResponse)
+        } catch (e:Exception) {
+            Result.failure<DailyResponse>(e)
+        }
+        emit(result)
+    }
+
 
     private fun <T> fire(context: CoroutineContext,block:suspend () -> Result<T>) =
         liveData<Result<T>>(context) {

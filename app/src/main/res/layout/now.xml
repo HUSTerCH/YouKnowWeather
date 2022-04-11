@@ -45,6 +45,14 @@
             android:layout_gravity="center_horizontal"
             android:textColor="#fff"
             android:textSize="70sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/max_min_temp"
+            android:textSize="16sp"
+            android:textColor="#fff"
+            android:layout_marginBottom="-10dp"
+            android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

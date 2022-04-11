@@ -12,4 +12,11 @@
         <attr name="current_progress" format="float"/>
         <attr name="max_progress" format="float"/>
     </declare-styleable>
+    <declare-styleable name="LifeIndexItemLayout">
+        <attr name="index_image" format="reference"/>
+        <attr name="index_text" format="string"/>
+        <attr name="index_desc" format="string"/>
+    </declare-styleable>
+
+
 </resources>

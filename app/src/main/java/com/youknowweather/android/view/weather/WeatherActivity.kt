@@ -10,6 +10,7 @@ import com.youknowweather.android.R
 import com.youknowweather.android.view.ChangeWindowColor
 import com.youknowweather.android.viewModel.WeatherViewModel
 import kotlinx.android.synthetic.main.air_quality.*
+import kotlinx.android.synthetic.main.life_index.*
 import kotlinx.android.synthetic.main.now.*
 
 class WeatherActivity :AppCompatActivity(){
@@ -17,8 +18,11 @@ class WeatherActivity :AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.weather_activity)
-
         viewModel.searchCityWea(
+            intent.getStringExtra("placeLng")!!,
+            intent.getStringExtra("placeLat")!!
+        )
+        viewModel.searchCityDailyWea(
             intent.getStringExtra("placeLng")!!,
             intent.getStringExtra("placeLat")!!
         )
@@ -27,16 +31,40 @@ class WeatherActivity :AppCompatActivity(){
             val weather = result.getOrNull()
             placeName.text = intent.getStringExtra("placeName")
             if (weather != null) {
-                currentTemp.text = "${weather.result.realtime.temperature.toInt()}°c"
+                currentTemp.text = "${weather.result.realtime.temperature.toInt()}°C"
                 ChangeWindowColor.setWindowStatusBarColor(this,setWeaImageAndText(weather.result.realtime.skycon))
                 currentAQI.text = "空气 ${ weather.result.realtime.air_quality.description.chn }"
                 air_circle_progress_bar.setCurrentProgress(weather.result.realtime.air_quality.aqi.chn.toFloat())
                 air_circle_progress_bar.setText(true,"")
                 air_desc.text = weather.result.realtime.air_quality.description.chn
                 aqi_data.text = weather.result.realtime.air_quality.aqi.chn.toInt().toString()
+                pm10.text = weather.result.realtime.air_quality.pm10.toInt().toString()
+                pm2_5.text = weather.result.realtime.air_quality.pm25.toInt().toString()
+                no2.text = weather.result.realtime.air_quality.no2.toInt().toString()
+                so2.text = weather.result.realtime.air_quality.so2.toInt().toString()
+                o3.text = weather.result.realtime.air_quality.o3.toInt().toString()
+                co.text = weather.result.realtime.air_quality.co.toInt().toString()
             } else {
                 Toast.makeText(this,"无法获取 ${intent.getStringExtra("placeName")} 的天气",Toast.LENGTH_LONG).show()
                 result.exceptionOrNull()?.printStackTrace()
+            }
+        })
+        viewModel.cityWeaDaily.observe(this, Observer { result ->
+            val dailyWea = result.getOrNull()
+            if (dailyWea != null) {
+                max_min_temp.text = "${dailyWea.result.daily.temperature[0].max.toInt()} / ${dailyWea.result.daily.temperature[0].min.toInt()} °C"
+                sunrise_time.setTextView(dailyWea.result.daily.astro[0].sunrise.time)
+                sunset_time.setTextView(dailyWea.result.daily.astro[0].sunset.time)
+                wind_speed.setTextView(dailyWea.result.daily.wind[0].avg.speed.toInt().toString())
+                wind_direction.setTextView(dailyWea.result.daily.wind[0].avg.direction.toString())
+                humidity.setTextView("${(dailyWea.result.daily.humidity[0].avg * 100).toInt()} %")
+                cloud_rate.setTextView("${(dailyWea.result.daily.cloudrate[0].avg * 100).toInt()} %")
+                visibility.setTextView("${ dailyWea.result.daily.visibility[0].avg} km")
+                uv_rate.setTextView(dailyWea.result.daily.life_index.ultraviolet[0].desc)
+                car_washing.setTextView(dailyWea.result.daily.life_index.carWashing[0].desc)
+                dressing_index.setTextView(dailyWea.result.daily.life_index.dressing[0].desc)
+                comfort_index.setTextView(dailyWea.result.daily.life_index.comfort[0].desc)
+                cold_risk.setTextView(dailyWea.result.daily.life_index.coldRisk[0].desc)
             }
         })
     }

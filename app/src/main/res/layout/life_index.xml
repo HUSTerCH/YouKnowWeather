@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="6dp">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TableRow>
+        <com.youknowweather.android.view.LifeIndexItemLayout
+            android:id="@+id/sunrise_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            app:index_image="@drawable/sunshine"
+            android:layout_marginStart="10sp"
+            android:layout_weight="1"
+            app:index_text="日出"/>
+        <com.youknowweather.android.view.LifeIndexItemLayout
+            android:id="@+id/sunset_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:index_image="@drawable/sunset"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10sp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            app:index_text="日落" />
+        <com.youknowweather.android.view.LifeIndexItemLayout
+            android:id="@+id/wind_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10sp"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            app:index_image="@drawable/wind_speed"
+            app:index_text="风速" />
+        <com.youknowweather.android.view.LifeIndexItemLayout
+            android:id="@+id/wind_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:index_image="@drawable/wind_direction"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:layout_weight="0.69"
+            android:gravity="center_horizontal"
+            app:index_text="风向" />
+    </TableRow>
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="@color/grey"/>
+    <TableRow>
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                app:index_image="@drawable/humidity"
+                app:index_text="湿度"
+                android:layout_weight="1" />
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/cloud_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:index_image="@drawable/cloud_rate"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                app:index_text="云率" />
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/visibility"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:index_image="@drawable/visibility"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                app:index_text="能见度" />
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/uv_rate"
+                android:layout_width="wrap_content"
+                app:index_image="@drawable/uv"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginEnd="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="0.69"
+                app:index_text="紫外强度" />
+        </TableRow>
+        <View
+            android:layout_height="2dp"
+            android:layout_width="match_parent"
+            android:background="@color/grey"/>
+    <TableRow>
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/car_washing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                app:index_image="@drawable/car_washing"
+                app:index_text="洗车"
+                android:layout_weight="1" />
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/dressing_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:index_image="@drawable/dressing"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                app:index_text="穿衣" />
+
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/comfort_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:index_image="@drawable/comfort"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                app:index_text="舒适度" />
+            <com.youknowweather.android.view.LifeIndexItemLayout
+                android:id="@+id/cold_risk"
+                android:layout_width="wrap_content"
+                app:index_image="@drawable/cold_risk"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10sp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10sp"
+                android:gravity="center_horizontal"
+                android:layout_weight="0.69"
+                app:index_text="感冒" />
+        </TableRow>
+    </TableLayout>
+</com.google.android.material.card.MaterialCardView>
+
+<!--在json中目前能拿到的数据：风向get、风速get、湿度get、云率get、能见度get、紫外强度get、洗车指数get、穿衣指数get、舒适度get、感冒指数get，日出时间get、日落时间get-->
